@@ -2,7 +2,7 @@
  * @Author: Tiga 526380248@qq.com
  * @Date: 2023-10-27 10:11:06
  * @LastEditors: Tiga 526380248@qq.com
- * @LastEditTime: 2023-10-27 10:45:00
+ * @LastEditTime: 2023-10-30 11:16:39
  * @FilePath: /DSAA/Stack.js
  * @Description: 实现栈结构
  */
@@ -58,21 +58,45 @@ function Stack() {
 }
 
 
-const s = new Stack();
+// const s = new Stack();
+//
+// s.push("1");
+// s.push("b");
+//
+// console.log(s);
+//
+// s.pop();
+// s.push("c");
+// s.push("2");
+//
+// console.log(s);
+//
+// console.log(s.peek());
+// console.log(s.isEmpty());
+// console.log(s.size());
+//
+// console.log(s.toString());
 
-s.push("1");
-s.push("b");
 
-console.log(s);
+// 利用栈存储十进制转二进制的过程
+function dec2bin(decNumber) {
 
-s.pop();
-s.push("c");
-s.push("2");
+  let stack = new Stack();
 
-console.log(s);
+  while (decNumber > 0) {
+    stack.push(decNumber % 2);
+    decNumber = Math.floor(decNumber / 2);
+  }
+  console.log(stack);
 
-console.log(s.peek());
-console.log(s.isEmpty());
-console.log(s.size());
+  let result = "";
+  // 出栈并拼接
+  while (!stack.isEmpty()) {
+    result += stack.pop();
+  }
+  return result;
+}
 
-console.log(s.toString());
+// 十进制转二进制结果
+const binNumber = dec2bin(1000);
+console.log("binNumber == ", binNumber);
