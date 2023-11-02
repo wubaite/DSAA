@@ -2,7 +2,7 @@
  * @Author: Tiga 526380248@qq.com
  * @Date: 2023-10-31 17:14:09
  * @LastEditors: Tiga 526380248@qq.com
- * @LastEditTime: 2023-10-31 17:53:25
+ * @LastEditTime: 2023-11-02 10:57:54
  * @FilePath: /DSAA/Queue.js
  * @Description: 基于数组实现队列
  */
@@ -59,19 +59,53 @@ function Queue() {
 
 }
 
-
-let queue = new Queue();
-queue.unqueue("a");
-queue.unqueue("b");
-queue.unqueue("c");
-queue.unqueue("d");
-console.log(queue);
-
-console.log(queue.front());
-
-queue.dequeue();
+// let queue = new Queue();
+// queue.unqueue("a");
+// queue.unqueue("b");
+// queue.unqueue("c");
+// queue.unqueue("d");
+// console.log(queue);
+//
+// console.log(queue.front());
+//
 // queue.dequeue();
-console.log(queue.dequeue());
+// console.log(queue.dequeue());
+//
+// console.log(queue.isEmpty());
+// console.log(queue.toString());
 
-console.log(queue.isEmpty());
-console.log(queue.toString());
+
+/**
+ * 使用队列实现小游戏“击鼓传花”
+ * @param {*} list 原数据
+ * @param {*} number 当前
+ */
+function passGame(list, number) {
+  // 声明一个新的队列，存放所有的数据
+  const queue = new Queue();
+
+  for (let i = 0; i < list.length; i++) {
+    queue.unqueue(list[i]);
+  }
+
+  while (queue.size() > 1) {
+    // 将队列中的元素一次移出队列，再添加到队列尾部
+    for (let k = 0; k < number - 1; k++) {
+      queue.unqueue(queue.dequeue());
+    }
+    // 当前第一个元素就是原数组中，索引为number元素
+    queue.dequeue();
+  }
+
+  const end = queue.front();
+  console.log("end ==== ", end);
+
+  return list.indexOf(end);
+}
+
+const list = ['a', 'b', 'c', 'd', 'e'];
+const endIndex = passGame(list, 4);
+console.log("原来的位置 === ", endIndex);
+
+
+
